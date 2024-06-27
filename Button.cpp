@@ -20,6 +20,8 @@ void Button::SetText(const char* text)
 {
 	this->text = std::wstring(text, text + strlen(text));
 	SetWindowText(GetDlgItem(GetParent(GetHWND()), id), this->text.c_str());
+	//update the text
+	Create(GetParent(GetHWND()));
 }
 
 void Button::SetVisible(bool visible) 

@@ -12,13 +12,15 @@ private:
     HWND hTextBox;
 
 public:
-    TextBox(std::wstring* initialText, int x, int y, int width, int height);
+    std::string name;
+    TextBox(std::string name, std::wstring* initialText, int x, int y, int width, int height);
 
     void Create(HWND parent) override;
 
     void UpdateText();
 
     void Update() {SetWindowText(hTextBox, text->c_str());}
+    std::string GetName() const override { return name; }
 
     void AddID(int newID) override {}
 

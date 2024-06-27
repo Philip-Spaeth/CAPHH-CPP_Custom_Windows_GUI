@@ -1,7 +1,7 @@
 #include "TextBox.h"
 
 
-TextBox::TextBox(std::wstring* initialText, int x, int y, int width, int height)  : text(initialText), x(x), y(y), width(width), height(height), hTextBox(nullptr)
+TextBox::TextBox(std::string name, std::wstring* initialText, int x, int y, int width, int height)  : name(name), text(initialText), x(x), y(y), width(width), height(height), hTextBox(nullptr)
 {
 
 }

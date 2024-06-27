@@ -17,6 +17,7 @@ protected:
 public:
     Window(HINSTANCE hInstance);
     void AddElement(std::shared_ptr<Element> element);
+    std::shared_ptr<Element> GetElement(std::string name);
     void Create(HINSTANCE hInst);
     void Update();
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

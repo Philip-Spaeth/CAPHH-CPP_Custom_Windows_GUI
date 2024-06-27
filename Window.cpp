@@ -22,6 +22,18 @@ void Window::AddElement(std::shared_ptr<Element> element)
     drawWindow(hnst);
 }
 
+std::shared_ptr<Element> Window::GetElement(std::string name)
+{
+    for (auto& element : elements)
+    {
+        if (element->GetName() == name)
+        {
+			return element;
+		}
+	}
+	return nullptr;
+}
+
 void Window::drawWindow(HINSTANCE hInst)
 {
     if (hWnd) {

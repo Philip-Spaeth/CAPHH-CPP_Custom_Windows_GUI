@@ -16,8 +16,11 @@ private:
 	RECT rect;
 	int x, y, width, height;
 
-public: 
-	TextBlock(std::wstring text, int x, int y, int fontSize, COLORREF color);
+
+public:
+	std::string name;
+	TextBlock(std::string name, std::wstring text, int x, int y, int fontSize, COLORREF color);
+	std::string GetName() const override { return name; }
 
 	void Create(HWND parent) override;
 

@@ -1,6 +1,6 @@
 #include "TextBlock.h"
 
-TextBlock::TextBlock(std::wstring text, int x, int y, int fontSize, COLORREF color)	: text(text), x(x), y(y), fontSize(fontSize), color(color)
+TextBlock::TextBlock(std::string name, std::wstring text, int x, int y, int fontSize, COLORREF color) : name(name), text(text), x(x), y(y), fontSize(fontSize), color(color)
 {
 	// set the heigth and width of the text block according to the text and font size
 	width = text.length() * fontSize * 0.5; // Schätzweise halbe Zeichenbreite für typische Schriftarten

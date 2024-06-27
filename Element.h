@@ -2,6 +2,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <string>
 
 class Element {
 public:
@@ -12,4 +13,5 @@ public:
     virtual void SetText(const char* text) = 0;
     virtual void SetVisible(bool visible) = 0;
     virtual HWND GetHWND() const = 0;
+    virtual std::string GetName() const = 0;
 };
