@@ -9,7 +9,7 @@ using namespace std;
 
 void MainWindow::Print()
 {
-    MessageBox(nullptr, L"djda", L"Nachricht", MB_OK | MB_ICONINFORMATION);
+    MessageBox(nullptr, L"djdhsdfjkksdfhksa", L"Nachricht", MB_OK | MB_ICONINFORMATION);
     AddElement(std::make_shared<TextBlock>(text, 400, 50, 30, 10));
 }
 
