@@ -9,7 +9,7 @@ using namespace std;
 
 void MainWindow::Print()
 {
-    AddElement(std::make_shared<TextBlock>("haler", 400, 50, 30, 10));
+    AddElement(std::make_shared<TextBlock>(Text, 400, 50, 30, 10));
 }
 
 MainWindow::MainWindow(HINSTANCE hInstance) : Window(hInstance)
