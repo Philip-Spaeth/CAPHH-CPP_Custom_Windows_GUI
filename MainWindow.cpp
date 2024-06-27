@@ -7,10 +7,6 @@
 
 using namespace std;
 
-void newBranch()
-{
-	cout << "new branch" << endl;
-}
 
 void MainWindow::Print()
 {
