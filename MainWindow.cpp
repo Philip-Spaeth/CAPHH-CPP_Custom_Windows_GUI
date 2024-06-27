@@ -19,8 +19,8 @@ MainWindow::MainWindow(HINSTANCE hInstance) : Window(hInstance)
     AddElement(std::make_shared<Button>(L"der andere button", 37, 490, 130, 90, [this]() { Print(); }));
 
     //Textblocks
-    AddElement(std::make_shared<TextBlock>(L"Hal der sie geschrieben hat muss sehr gut sein", 10, 50, 5, 10));
+    AddElement(std::make_shared<TextBlock>(L"der dass hier geschrieben hat muss sehr gut sein", 10, 50, 5, 10));
 
     //TextBox
-    AddElement(std::make_shared<TextBox>(&text, 10, 100, 200, 200));
+    AddElement(std::make_shared<TextBox>(&text, 10, 120, 200, 200));
 }
