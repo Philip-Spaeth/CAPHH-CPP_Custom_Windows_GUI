@@ -5,28 +5,47 @@
 #include "Button.h"
 #include "TextBlock.h"
 #include "TextBox.h"
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
 
 Window::Window(HINSTANCE hInstance) : hWnd(nullptr)
 {
     hnst = hInstance;
-    // Create the window
-    Create(hnst);
+    // create the window
+    create(hnst);
 }
 
-void Window::AddElement(std::shared_ptr<Element> element)
+void Window::addElement(std::shared_ptr<Element> element)
 {
     elements.push_back(element);
 
-    element->AddID(elements.size());
+    element->addID(elements.size());
     // Redraw the window
-    drawWindow(hnst);
+    drawWindow();
 }
 
-std::shared_ptr<Element> Window::GetElement(std::string name)
+void Window::deleteElement(std::string name)
+{
+    for (int i = 0; i < elements.size(); i++)
+    {
+        if (elements[i]->getName() == name)
+        {
+            elements[i]->setVisibility(false);
+            elements.erase(elements.begin() + i);
+            drawWindow();
+            break;
+        }
+    }
+}
+
+
+std::shared_ptr<Element> Window::getElement(std::string name)
 {
     for (auto& element : elements)
     {
-        if (element->GetName() == name)
+        if (element->getName() == name)
         {
 			return element;
 		}
@@ -34,13 +53,17 @@ std::shared_ptr<Element> Window::GetElement(std::string name)
 	return nullptr;
 }
 
-void Window::drawWindow(HINSTANCE hInst)
+void Window::drawWindow()
 {
-    if (hWnd) {
-        // Only create elements if they are not already created
+    if (hWnd) 
+    {
+        // Invalidate the client area to trigger WM_PAINT
+        InvalidateRect(hWnd, nullptr, TRUE);
+        UpdateWindow(hWnd);
+
         for (auto& element : elements)
         {
-            element->Create(hWnd);
+            element->create(hWnd);
         }
         // Don't create the window here, only draw it so that the window is created only once
         ShowWindow(hWnd, SW_SHOW);
@@ -48,7 +71,7 @@ void Window::drawWindow(HINSTANCE hInst)
     }
 }
 
-void Window::Create(HINSTANCE hInst) {
+void Window::create(HINSTANCE hInst) {
     const wchar_t CLASS_NAME[] = L"Sample Window Class";
 
     WNDCLASS wc = {};
@@ -58,10 +81,9 @@ void Window::Create(HINSTANCE hInst) {
 
     RegisterClass(&wc);
 
-    hWnd = CreateWindowEx(0, CLASS_NAME, L"Sample Window", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, nullptr, nullptr, hInst, this);
+    hWnd = CreateWindowEx(0, CLASS_NAME, L"Sample Window", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, nullptr, nullptr, hInst, this);
 
-    drawWindow(hInst);
+    drawWindow();
 }
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -74,7 +96,21 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
     else {
         Window* pMainWindow = (Window*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
         if (pMainWindow) {
-            switch (message) {
+            switch (message) 
+            {
+            case WM_PAINT:
+            {
+                PAINTSTRUCT ps;
+                HDC hdc = BeginPaint(hWnd, &ps);
+
+                // Clear the window by filling it with the background color
+                FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+
+                // Add any additional custom drawing code here if needed
+
+                EndPaint(hWnd, &ps);
+                break;
+            }
             case WM_COMMAND:
                 for (auto& element : pMainWindow->elements) {
                     auto button = dynamic_cast<Button*>(element.get());
@@ -88,7 +124,7 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 
                     auto textBox = dynamic_cast<TextBox*>(element.get());
                     if (textBox && HIWORD(wParam) == EN_CHANGE && (HWND)lParam == textBox->GetHandle()) {
-                        textBox->UpdateText();
+                        textBox->updateText();
                         return 0;
                     }
                 }

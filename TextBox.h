@@ -5,30 +5,32 @@
 
 using namespace std;
 
-class TextBox : public Element {
+class TextBox : public Element 
+{
 private:
     std::wstring* text;  // Zeiger auf den String, der aktualisiert wird
     int x, y, width, height;
     HWND hTextBox;
+    bool visible = true;
 
 public:
     std::string name;
     TextBox(std::string name, std::wstring* initialText, int x, int y, int width, int height);
 
-    void Create(HWND parent) override;
+    void create(HWND parent) override;
 
-    void UpdateText();
+    void updateText();
 
-    void Update() {SetWindowText(hTextBox, text->c_str());}
-    std::string GetName() const override { return name; }
+    void update() {SetWindowText(hTextBox, text->c_str());}
+    std::string getName() const override { return name; }
 
-    void AddID(int newID) override {}
+    void addID(int newID) override {}
 
     // Getter für das Handle des Textfeldes, falls benötigt
     HWND GetHandle() const {return hTextBox;}
 
-    void SetPos(int x, int y, int width, int height) override;
-    void SetText(const char* text) override;
-    void SetVisible(bool visible) override;
+    void setPos(int x, int y, int width, int height) override;
+    void setText(const char* text) override;
+    void setVisibility(bool visible) override;
     HWND GetHWND() const override;
 };

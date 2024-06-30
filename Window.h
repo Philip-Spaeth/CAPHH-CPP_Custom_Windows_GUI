@@ -16,10 +16,10 @@ protected:
 
 public:
     Window(HINSTANCE hInstance);
-    void AddElement(std::shared_ptr<Element> element);
-    std::shared_ptr<Element> GetElement(std::string name);
-    void Create(HINSTANCE hInst);
-    void Update();
+    void addElement(std::shared_ptr<Element> element);
+    std::shared_ptr<Element> getElement(std::string name);
+    void create(HINSTANCE hInst);
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-    void drawWindow(HINSTANCE hInst);
+    void drawWindow();
+    void deleteElement(std::string name);
 };

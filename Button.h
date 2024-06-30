@@ -12,24 +12,25 @@ class Button : public Element {
 private:
     std::wstring text;
     int x, y, width, height;
+    bool visible = true;
 
 public:
     std::string name;
     int id = 0;
     std::function<void()> onClick;
 
-    void AddID(int newID) override {id = newID;}
+    void addID(int newID) override {id = newID;}
 
     Button(std::string name, std::wstring text, int x, int y, int width, int height, std::function<void()> onClick)  : name(name), text(text), x(x), y(y), width(width), height(height), onClick(onClick) {}
 
-    void Create(HWND parent) override;
+    void create(HWND parent) override;
     HWND GetHWND() const override;
-    std::string GetName() const override {return name;}
+    std::string getName() const override {return name;}
 
 
     std::function<void()> GetOnClickFunction() const {return onClick;}
 
-    void SetPos(int x, int y, int width, int height) override;
-    void SetText(const char* text) override;
-    void SetVisible(bool visible) override;
+    void setPos(int x, int y, int width, int height) override;
+    void setText(const char* text) override;
+    void setVisibility(bool visible) override;
 };

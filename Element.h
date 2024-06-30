@@ -7,11 +7,11 @@
 class Element {
 public:
     virtual ~Element() {}
-    virtual void Create(HWND parent) = 0;  // Pure virtual function to create the element
-    virtual void AddID(int newID) = 0;
-    virtual void SetPos(int x, int y, int width, int height) = 0;
-    virtual void SetText(const char* text) = 0;
-    virtual void SetVisible(bool visible) = 0;
+    virtual void create(HWND parent) = 0;  // Pure virtual function to create the element
+    virtual void addID(int newID) = 0;
+    virtual void setPos(int x, int y, int width, int height) = 0;
+    virtual void setText(const char* text) = 0;
+    virtual void setVisibility(bool visible) = 0;
     virtual HWND GetHWND() const = 0;
-    virtual std::string GetName() const = 0;
+    virtual std::string getName() const = 0;
 };

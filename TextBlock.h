@@ -15,19 +15,20 @@ private:
 	HDC hdc;
 	RECT rect;
 	int x, y, width, height;
+	bool visible = true;
 
 
 public:
 	std::string name;
 	TextBlock(std::string name, std::wstring text, int x, int y, int fontSize, COLORREF color);
-	std::string GetName() const override { return name; }
+	std::string getName() const override { return name; }
 
-	void Create(HWND parent) override;
+	void create(HWND parent) override;
 
-	void AddID(int newID) override;
+	void addID(int newID) override;
 
-	void SetPos(int x, int y, int width, int height) override;
-	void SetText(const char* text) override;
-	void SetVisible(bool visible) override;
+	void setPos(int x, int y, int width, int height) override;
+	void setText(const char* text) override;
+	void setVisibility(bool visible) override;
 	HWND GetHWND() const override;
 };
